@@ -111,7 +111,34 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="js/jquery-ui-1.10.4.custom.min.js"></script>
 <script>
+	
+	/* сделать все одной функцией
+	
+	$('has_submenu_slidedown, has_submenu_dropdown').on({
+	    mouseenter: function() {
+	        if ( (has_submenu_slidedown) ) {
+	        	$(this).stop(true, true).slideToggle(350, "easeOutExpo");
+	        }
+	        else {
+				$(this).stop(true, true).fadeToggle(350, "easeOutExpo");
+	        }
+	        
+	    },
+	    mouseleave: function() {
+	        
+	    }
+	});
+
+	
+	$('.has_submenu_slidedown, .has_submenu_dropdown').children().append("<span> +</span>");
+	
+
+	*/
+
+
+
 	$(document).ready(function(){
+
 		$('.has_submenu_slidedown >a').append("<span> +</span>");
 		$('.has_submenu_dropdown >a').append("<span> +</span>");
 		
@@ -121,6 +148,7 @@
 		$('.menu').find('.has_submenu_dropdown').on('mouseenter mouseleave', function(){
 			$(this).find('.submenu_dropdown:first').stop(true, true).fadeToggle(350, "easeOutExpo");
 		});
+
 	});
 </script>
 </html>
