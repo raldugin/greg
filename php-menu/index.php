@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
 	<meta charset="UTF-8">
 	<title>Menu</title>
@@ -87,7 +87,7 @@
 											<?php asort($root_menu_item['submenu']) ?>
 											<li class="has_submenu_dropdown"><a href=""><?= $key; ?></a>
 												<ul class="submenu_dropdown">
-													<?= generate_submenu($root_menu_item['submenu']) ?>
+													<?= generate_submenu($root_menu_item['submenu']) 
 												</ul>
 											</li>
 
