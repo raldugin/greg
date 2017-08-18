@@ -116,8 +116,11 @@
 	
 	$('has_submenu_slidedown, has_submenu_dropdown').on({
 	    mouseenter: function() {
-	        if ( (has_submenu_slidedown) ) {
+	        
+	        console.log(this);
+	        if ( $(this).hasClass(has_submenu_slidedown) ) {
 	        	$(this).stop(true, true).slideToggle(350, "easeOutExpo");
+
 	        }
 	        else {
 				$(this).stop(true, true).fadeToggle(350, "easeOutExpo");
