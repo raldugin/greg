@@ -45,10 +45,10 @@
 	$value_name = $value_email = $value_password = $value_password_confirmed = NULL;
 
 	if (isset($_POST['submit'])) {
-		$name = user_data($_POST['name']);
-		$email = user_data($_POST['email']);
-		$password = user_data($_POST['password']);
-		$confirmed_password = user_data($_POST['confirmed_password']);
+		$name = clear_data($_POST['name']);
+		$email = clear_data($_POST['email']);
+		$password = clear_data($_POST['password']);
+		$confirmed_password = clear_data($_POST['confirmed_password']);
 
 		var_dump( (bool)isset($name)); // если установлена переменная, то TRUE
 		var_dump( (bool)empty($name)); // если переменная 0, "0",'', false или NULL, то TRUE
@@ -65,7 +65,6 @@
 		else {
 			$value_email = $email;
 		}
-
 		if (empty($password)) {
 			$label_password = $label_password_arr[1];
 		}
@@ -73,12 +72,10 @@
 			$value_password = $password;
 		}
 
-		if (empty($confirmed_password)) {
+		if (empty($confirmed_password) || $confirmed_password !== $password ) {
 			$label_confirmed_password = $label_confirmed_password_arr[1];
 		}
-		else {
-			$value_password_confirmed = $confirmed_password;
-		}
+
 
 
 
@@ -95,9 +92,10 @@
 			//var_dump($_POST['remember_me']);
 		}
 
+
 	} // end of if ($_POST['submit'])
 
-	function user_data($data) {
+	function clear_data($data) {
 		$data = trim($data);
 		$data = stripslashes($data);
 		$data = htmlspecialchars($data);

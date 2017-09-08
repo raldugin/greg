@@ -5,25 +5,23 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<title>Login</title>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
-	<link type="text/css" rel="stylesheet" href="css/normalize.css"/>
+	<link type="text/css" rel="stylesheet" href="../css/materialize.css" media="screen,projection"/>
+	<link type="text/css" rel="stylesheet" href="../css/normalize.css"/>
 	<style>
-		* {margin: 0; padding: 0;}
-		html{height: 100%; overflow-y: scroll; -ms-overflow-style: scrollbar; text-rendering: optimizeLegibility !important; -webkit-font-smoothing: antialiased !important;}
-		body {height: 100%; -webkit-backface-visibility: hidden; background: #ececec;}
+		* { margin: 0; padding: 0; }
+		html { height: 100%; overflow-y: scroll; -ms-overflow-style: scrollbar; text-rendering: optimizeLegibility !important; -webkit-font-smoothing: antialiased !important; }
+		body { height: 100%; -webkit-backface-visibility: hidden; background: #ececec; }
 
 		.wrapper {
 			position: relative;
 			width: 405px;
-			top:50%;
+			top: 50%;
 			left: 50%;
-
 			transform: translate(-50%, -50%);
 			-moz-transform: translate(-50%, -50%);
 			-webkit-transform: translate(-50%, -50%);
 			-o-transform: translate(-50%, -50%);
 			-ms-transform: translate(-50%, -50%);
-
 			-webkit-transition: transform 0.2s ease-out;
 			-moz-transition: transform 0.2s ease-out;
 			-o-transition: transform 0.2s ease-out;
@@ -58,9 +56,9 @@
 					<div class="input-field">
 						<select>
 							<option value="" disabled selected>Выберите вариант</option>
-							<option value="1">Дизайн</option>
-							<option value="2">Программирование</option>
-							<option value="3">Ничего не прет</option>
+							<option name="list_item" value="Дизайн">Дизайн</option>
+							<option name="list_item" value="Программирование">Программирование</option>
+							<option name="list_item" value="Ничего не прет">Ничего не прет</option>
 						</select>
 						<label>Призвание</label>
 					</div>
@@ -78,7 +76,7 @@
 						<label for="textarea">Ваш комментарий</label>
 					</div>
 					<p>
-						<input type="checkbox" class="filled-in" id="filled-in-box" checked>
+						<input name="remebmer_me" type="checkbox" class="filled-in" id="filled-in-box" checked>
 						<label for="filled-in-box">Запомнить меня</label>
 					</p>
 					<button class="btn waves-effect waves-light" type="submit" name="action">Зарегистрироваться</button>
@@ -89,12 +87,15 @@
 	</div>
 </main>
 
+<?php
+
+?>
 
 </body>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript" src="../js/materialize.min.js"></script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('select').material_select();
     });
 </script>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Menu</title>
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Roboto:400,700&amp;subset=cyrillic">	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Scada:400,700&amp;subset=cyrillic">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+</head>
+<style>
+	a:link { color: #5e82f9; text-decoration: none; } 
+	a:visited { color: #5e82f9; text-decoration: none; }
+	a:hover { color: #4a72f8; text-decoration: none; }
+
+	.menu {
+		display: inline-block;
+		position: relative;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		font-size: 0;
+	}
+	.menu li{		
+		list-style: none;
+		display: inline-block;
+		position: relative;		
+	}
+	.menu li a{
+		display: inline-block;
+		padding: 10px;
+		background: #2b78a5;
+		color: White;
+		font-family: Roboto, sans-serif;
+		font-size: 18px;
+		padding-right: 70px;
+		width: 100px;
+		border-left: 1px solid rgba(255,255,255,0.3);
+		transition: all 0.1s cubic-bezier(0.000, 0.000, 0.580, 1.000);
+	}
+	.menu li a:hover{
+		background: #368ec1;
+		transition: all 0.3s cubic-bezier(0.000, 0.000, 0.580, 1.000);
+	}
+	.has_submenu_slidedown {
+		position: relative;
+	}
+	/*.has_submenu_slidedown:hover .submenu_slidedown{
+		display: block;
+	}*/
+	.has_submenu_dropdown {
+		position: relative;
+	}
+	/*.has_submenu_dropdown:hover .submenu_dropdown{
+		display: block;
+	}*/
+	.submenu_slidedown {
+		display: none;
+		position: absolute;
+		padding: 0;
+		top: 100%;
+		left: 0;
+		list-style: none;		
+	}
+	.submenu_slidedown li a, .submenu_dropdown li a{
+		font-size: 16px;    
+		border-top: 1px solid rgba(255,255,255,0.3);
+		border-bottom: none;
+		line-height: 18px;
+		width: 100px;
+	}
+
+	.submenu_dropdown {
+		display: none;
+		padding: 0;
+		position: absolute;
+		left: 100%;
+		top: 0;
+		width: 100%;
+	}
+
+</style>
+<body>
+	<header>
+		<nav>
+			<ul class="menu">
+				<li><a href="#">root</a></li>
+				<li class="has_submenu_slidedown"><a href="#">root</a>
+					<ul class="submenu_slidedown">
+						<li><a href="#">menu item</a></li>
+					</ul>
+				</li>
+				<li><a href="#">root</a></li>
+				<li class="has_submenu_slidedown"><a href="#">root menu</a>
+					<ul class="submenu_slidedown">
+						<li><a href="#">menu item</a></li>
+						<li class="has_submenu_dropdown"><a href="#">menu item</a>
+							<ul class="submenu_dropdown">
+								<li><a href="#">menu item</a></li>
+								<li><a href="#">menu item</a></li>
+								<li><a href="#">menu item</a></li>
+								<li><a href="#">menu item</a></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+	</header>
+</body>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="/assets1/js/jquery-ui-1.10.4.custom.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$('.has_submenu_slidedown >a').append("<span> +</span>");
+		$('.has_submenu_dropdown >a').append("<span> +</span>");
+		
+		$('.menu').find('.has_submenu_slidedown').on('mouseenter mouseleave', function(){
+			$(this).find('.submenu_slidedown:first').stop(true, true).slideToggle(350, "easeOutExpo");
+		});
+		$('.menu').find('.has_submenu_dropdown').on('mouseenter mouseleave', function(){
+			$(this).find('.submenu_dropdown:first').stop(true, true).fadeToggle(350, "easeOutExpo");
+		});
+	});
+</script>
+</html>
