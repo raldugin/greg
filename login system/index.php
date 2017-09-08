@@ -35,14 +35,14 @@
 	$label_name_arr = ['Имя', 'Введите Ваше имя'];
 	$label_email_arr = ['Email', 'Введите валидный email'];
 	$label_password_arr = ['Пароль', 'Введите пароль'];
-	$label_confirmed_password_arr = ['Повторите свой пароль','Пароли не совпадаю'];
+	$label_confirmed_password_arr = ['Продублируйте пароль','Пароль не совпадает'];
 
 	$label_name = $label_name_arr[0];
 	$label_email = $label_email_arr[0];
 	$label_password = $label_password_arr[0];
 	$label_confirmed_password = $label_confirmed_password_arr[0];
 
-	$value_name = $value_email = $value_password = NULL;
+	$value_name = $value_email = $value_password = $value_password_confirmed = NULL;
 
 	if (isset($_POST['submit'])) {
 		$name = user_data($_POST['name']);
@@ -75,6 +75,9 @@
 
 		if (empty($confirmed_password)) {
 			$label_confirmed_password = $label_confirmed_password_arr[1];
+		}
+		else {
+			$value_password_confirmed = $confirmed_password;
 		}
 
 
@@ -110,18 +113,18 @@
 					<h5 class="row center-align">Регистрация</h5>
 					<div class="input-field">
 						<input  name="name" value="<?= $value_name ?>" id="name" type="text" class="validate active">
-						<label for="name">Имя</label>
+						<label for="name"><?= $label_name ?></label>
 					</div>
 					<div class="input-field">
 						<input name="email" value="<?= $value_email ?>" id="email" type="email" class="validate">
-						<label for="email">Email</label>
+						<label for="email"><?= $label_email ?></label>
 					</div>
 					<div class="input-field">
 						<input name="password" value="<?= $value_password ?>" id="password" type="password" class="validate">
-						<label for="password">Введите пароль</label>
+						<label for="password"><?= $label_password ?></label>
 					</div>
 					<div class="input-field">
-						<input name="confirmed_password" id="confirmed_password" type="password" class="validate">
+						<input name="confirmed_password" value="<?= $value_password_confirmed ?>" id="confirmed_password" type="password" class="validate">
 						<label for="confirmed_password"><?= $label_confirmed_password ?></label>
 					</div>
 					<div class="input-field">
