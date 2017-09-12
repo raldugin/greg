@@ -46,7 +46,7 @@
 	$label_password = $label_password_arr[0];
 	$label_confirmed_password = $label_confirmed_password_arr[0];
 
-	//$value_name = $value_email = $value_password = $value_password_confirmed = NULL;
+	$value_name = $value_email = $value_password = $value_password_confirmed = NULL;
 
 	if (isset($_POST['submit'])) {
 		$name = clear_data($_POST['name']);
@@ -62,7 +62,9 @@
 			$label_name = $label_name_arr[1];
 			$error [] = 'name_problem';
 		}
-
+		else {
+			$value_name = $name;
+		}
 
 		// преверка email
 		if (empty($email)) {
@@ -73,7 +75,9 @@
 			$label_email = $label_email_arr[2];
 			$error [] = 'email_validation_problem';
 		}
-
+		else {
+			$value_email = $email;
+		}
 
 		// преверка пароля
 		if (empty($password)) {
@@ -84,7 +88,9 @@
 			$label_password = $label_password_arr[2];
 			$error [] = 'password_length_problem';
 		}
-
+		else {
+			$value_password = $password;
+		}
 
 		// преверка дубликата пароля
 		if (empty($confirmed_password) ) {
@@ -139,19 +145,19 @@
 				<div class="row">
 					<h5 class="row center-align">Регистрация</h5>
 					<div class="input-field">
-						<input  name="name" value="<?= $name ?>" id="name" type="text" class="validate active">
+						<input  name="name" value="<?= $value_name ?>" id="name" type="text" class="validate active">
 						<label for="name"><?= $label_name ?></label>
 					</div>
 					<div class="input-field">
-						<input name="email" value="<?= $email ?>" id="email" type="email" class="validate">
+						<input name="email" value="<?= $value_email ?>" id="email" type="email" class="validate">
 						<label for="email"><?= $label_email ?></label>
 					</div>
 					<div class="input-field">
-						<input name="password" value="<?= $password ?>" id="password" type="password" class="validate">
+						<input name="password" value="<?= $value_password ?>" id="password" type="password" class="validate">
 						<label for="password"><?= $label_password ?></label>
 					</div>
 					<div class="input-field">
-						<input name="confirmed_password" id="confirmed_password" type="password" class="validate">
+						<input name="confirmed_password" value="<?= $value_password_confirmed ?>" id="confirmed_password" type="password" class="validate">
 						<label for="confirmed_password"><?= $label_confirmed_password ?></label>
 					</div>
 
