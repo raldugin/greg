@@ -46,7 +46,7 @@
 	$label_password = $label_password_arr[0];
 	$label_confirmed_password = $label_confirmed_password_arr[0];
 
-	//$value_name = $value_email = $value_password = $value_password_confirmed = NULL;
+	$name = $email = $password = $password_confirmed = NULL;
 
 	if (isset($_POST['submit'])) {
 		$name = clear_data($_POST['name']);
@@ -72,6 +72,7 @@
 		elseif (!preg_match($email_validator, $email)) {
 			$label_email = $label_email_arr[2];
 			$error [] = 'email_validation_problem';
+			$class_email = 'invalid';
 		}
 
 
@@ -83,6 +84,7 @@
 		elseif (strlen($password) < 6) {
 			$label_password = $label_password_arr[2];
 			$error [] = 'password_length_problem';
+			$class_password = 'invalid';
 		}
 
 
@@ -90,10 +92,12 @@
 		if (empty($confirmed_password) ) {
 			$label_confirmed_password = $label_confirmed_password_arr[0];
 			$error [] = 'confirmed_password_problem';
+			$class = 'invalid';
 		}
 		elseif ($confirmed_password !== $password) {
 			$label_confirmed_password = $label_confirmed_password_arr[1];
 			$error [] = 'confirmed_password_problem';
+			$class_confirmed_password = 'invalid';
 		}
 
 
@@ -139,19 +143,19 @@
 				<div class="row">
 					<h5 class="row center-align">Регистрация</h5>
 					<div class="input-field">
-						<input  name="name" value="<?= $name ?>" id="name" type="text" class="validate active">
+						<input  name="name" value="<?= $name ?>" id="name" type="text" class="validate active <?= $class_name ?>">
 						<label for="name"><?= $label_name ?></label>
 					</div>
 					<div class="input-field">
-						<input name="email" value="<?= $email ?>" id="email" type="email" class="validate">
+						<input name="email" value="<?= $email ?>" id="email" type="email" class="validate <?= $class_email ?>">
 						<label for="email"><?= $label_email ?></label>
 					</div>
 					<div class="input-field">
-						<input name="password" value="<?= $password ?>" id="password" type="password" class="validate">
+						<input name="password" value="<?= $password ?>" id="password" type="password" class="validate <?= $class_password ?>">
 						<label for="password"><?= $label_password ?></label>
 					</div>
 					<div class="input-field">
-						<input name="confirmed_password" id="confirmed_password" type="password" class="validate">
+						<input name="confirmed_password" id="confirmed_password" type="password" class="validate <?= $class_confirmed_password ?>">
 						<label for="confirmed_password"><?= $label_confirmed_password ?></label>
 					</div>
 
