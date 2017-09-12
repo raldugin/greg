@@ -30,6 +30,24 @@
 	</style>
 </head>
 <body>
+<!-- Dropdown Structure -->
+<ul id="dropdown1" class="dropdown-content">
+	<li><a href="#!">one</a></li>
+	<li><a href="#!">two</a></li>
+	<li class="divider"></li>
+	<li><a href="#!">three</a></li>
+</ul>
+<nav>
+	<div class="nav-wrapper">
+		<a href="#!" class="brand-logo">Logo</a>
+		<ul class="right hide-on-med-and-down">
+			<li><a href="sass.html">Sass</a></li>
+			<li><a href="badges.html">Components</a></li>
+			<!-- Dropdown Trigger -->
+			<li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+		</ul>
+	</div>
+</nav>
 
 <?php
 
@@ -38,8 +56,8 @@
 
 	$label_name_arr = ['Имя', 'Введите Ваше имя'];
 	$label_email_arr = ['Email', 'Введите email', 'Введите валидный email'];
-	$label_password_arr = ['Пароль', 'Введите пароль', 'Пароль меньше 6 символов'];
-	$label_confirmed_password_arr = ['Повторите пароль','Пароли не совпадают'];
+	$label_password_arr = ['Пароль', 'Введите пароль', 'Пароль должен быть не менее 6 символов'];
+	$label_confirmed_password_arr = ['Повторите пароль','Введите повторно пароль','Пароли не совпадают'];
 
 	$label_name = $label_name_arr[0];
 	$label_email = $label_email_arr[0];
@@ -48,6 +66,7 @@
 
 	$name = $email = $password = $password_confirmed = NULL;
 
+	//if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	if (isset($_POST['submit'])) {
 		$name = clear_data($_POST['name']);
 		$email = clear_data($_POST['email']);
@@ -63,7 +82,6 @@
 			$error [] = 'name_problem';
 		}
 
-
 		// преверка email
 		if (empty($email)) {
 			$label_email = $label_email_arr[1];
@@ -75,49 +93,60 @@
 			$class_email = 'invalid';
 		}
 
-
 		// преверка пароля
 		if (empty($password)) {
 			$label_password = $label_password_arr[1];
 			$error [] = 'password_problem';
 		}
-		elseif (strlen($password) < 6) {
+		elseif (strlen($password) < 1) {
 			$label_password = $label_password_arr[2];
 			$error [] = 'password_length_problem';
 			$class_password = 'invalid';
 		}
 
-
 		// преверка дубликата пароля
 		if (empty($confirmed_password) ) {
-			$label_confirmed_password = $label_confirmed_password_arr[0];
+			$label_confirmed_password = $label_confirmed_password_arr[1];
 			$error [] = 'confirmed_password_problem';
 			$class = 'invalid';
 		}
 		elseif ($confirmed_password !== $password) {
-			$label_confirmed_password = $label_confirmed_password_arr[1];
+			$label_confirmed_password = $label_confirmed_password_arr[2];
 			$error [] = 'confirmed_password_problem';
 			$class_confirmed_password = 'invalid';
 		}
 
 
-
-		if (isset($_POST['mission'])) {
-			//var_dump($_POST['mission']);
-		}
-		if (isset($_POST['comment'])) {
-			//var_dump($_POST['comment']);
-		}
-		if (isset($_POST['radio_button'])) {
-			//var_dump($_POST['radio_button']);
-		}
-		if (isset($_POST['remember_me'])) {
-			//var_dump($_POST['remember_me']);
-		}
+//		if (isset($_POST['mission'])) {
+//			//var_dump($_POST['mission']);
+//		}
+//		if (isset($_POST['comment'])) {
+//			//var_dump($_POST['comment']);
+//		}
+//		if (isset($_POST['radio_button'])) {
+//			//var_dump($_POST['radio_button']);
+//		}
+//		if (isset($_POST['remember_me'])) {
+//			//var_dump($_POST['remember_me']);
+//		}
 
 		// если кол-во элементов массива $error - FALSE (не найдены ошибки), то делаем редирект на новую страницу и передаем имя
 		if (!count($error)) {
-			header( 'Location: entered.php?name='.$name);
+
+			// перекодировка ИМЕНИ пользователя из utf-8 в windows-1251 для создания директории (для WINDOWS машин)
+			$user_dir = 'users/' . iconv('utf-8', 'windows-1251', $name);
+
+			if (is_dir($user_dir)) {
+				rmdir_recursive ($user_dir);
+				//rmdir($user_dir);
+			}
+
+			// recursive для вложенной структуры
+			mkdir($user_dir, 0755, true);
+			file_put_contents($user_dir.'/name.txt', $name);
+			file_put_contents($user_dir.'/email.txt', $email);
+			file_put_contents($user_dir.'/password.txt', $password);
+//			//header( 'Location: entered.php?name='.$name);
 		}
 
 	} // end of if ($_POST['submit'])
@@ -125,6 +154,17 @@
 //		echo "<pre>";
 //		print_r($error);
 //		echo "</pre>";
+
+	// функция удаляет рекурсивно директорию с вложениями и файлами
+	function rmdir_recursive($dir) {
+		$it = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
+		$it = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
+		foreach($it as $file) {
+			if ($file->isDir()) rmdir($file->getPathname());
+			else unlink($file->getPathname());
+		}
+		rmdir($dir);
+	}
 
 	function clear_data($data) {
 		$data = trim($data);
@@ -223,6 +263,7 @@
 <script>
     $(document).ready(function () {
         $('select').material_select();
+        //$(".dropdown-button").dropdown();
     });
 </script>
 </html>
