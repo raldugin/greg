@@ -54,6 +54,8 @@
 	error_reporting(E_ALL);
 	ini_set('display_errors', 1);
 
+	include_once ('includes/constants.php');
+
 	$error = [];
 	$email_validator = '/.+@.+\..+/i';
 
@@ -136,23 +138,14 @@
 		// если кол-во элементов массива $error - FALSE (не найдены ошибки), то делаем редирект на новую страницу и передаем имя
 		if (!count($error)) {
 
-			// перекодировка ИМЕНИ пользователя из utf-8 в windows-1251 для создания директории (для WINDOWS машин)
-			$user_dir = 'users/' . iconv('utf-8', 'windows-1251', $name);
-
-			if (is_dir($user_dir)) {
-				rmdir_recursive ($user_dir);
-				//rmdir($user_dir);
+			if (!is_dir(USER_DATA_DIR)) {
+				mkdir(USER_DATA_DIR, 0777, true);
 			}
 
-			// recursive для вложенной структуры
-			mkdir($user_dir, 0755, true);
+			// пишет данные в файл и добавляет новые записи при новом обращении ()
+			file_put_contents(USER_DATA_DIR.'user_data.txt', $name.'|'.$email.'|'.$password.'|'.$confirmed_password.PHP_EOL, FILE_APPEND);
 
-			// пишет данные в файл и добавляет новые записи при новом обращении
-			//file_put_contents($user_dir.'/user_data.txt', $name.'|'.$email.'|'.$password.'|'.$confirmed_password.PHP_EOL, FILE_APPEND);
-
-			// пишет данные в файл и перезаписывает его при новом обращении
-			file_put_contents($user_dir.'/name.txt', $name.'|'.$email.'|'.$password.'|'.$confirmed_password.PHP_EOL);
-//			//header( 'Location: entered.php?name='.$name);
+			header( 'Location: entered.php?name='.$name);
 		}
 
 	} // end of if ($_POST['submit'])
@@ -160,17 +153,6 @@
 //		echo "<pre>";
 //		print_r($error);
 //		echo "</pre>";
-
-	// функция удаляет рекурсивно директорию с вложениями и файлами
-	function rmdir_recursive($dir) {
-		$it = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
-		$it = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
-		foreach($it as $file) {
-			if ($file->isDir()) rmdir($file->getPathname());
-			else unlink($file->getPathname());
-		}
-		rmdir($dir);
-	}
 
 	function clear_data($data) {
 		$data = trim($data);
