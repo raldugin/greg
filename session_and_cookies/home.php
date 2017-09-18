@@ -8,11 +8,13 @@
     //error_reporting(E_ALL);
 	session_name( 'overhot_session');
 	session_start();
-	var_dump($_SESSION);
 
 	if (!isset($_SESSION['user_id'])) {
 		header('Location: index.php');
 	}
+
+
+
 
     ?>
 
@@ -25,9 +27,8 @@
 	<title>Document</title>
 </head>
 <body>
-	<h2>Здравствуйте,</h2>
-	<h3>Вы успешно вошли в систему</h3>
-	<a href="home1.php">Перейти на другую страницу</a>
+	<h2>Здравствуйте, <?= $_SESSION['username'] ?></h2>
+	<a href="profile.php">Перейти в личный кабинет</a>
 	<br>
 	<a href="logout.php">Покинуть сайт</a>
 </body>
