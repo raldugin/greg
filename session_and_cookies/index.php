@@ -3,6 +3,8 @@
 	ini_set('display_errors', 1);
 	error_reporting(E_ALL);
 	define('USER_DATA_DIR', 'users_data/');
+	session_name('overhot_session');
+	session_start();
 
 	$email = $password = $error = '';
 	$email_validator = '/.+@.+\..+/i';
@@ -19,8 +21,6 @@
 		}
 
 		if ($error == '') {
-			session_name('overhot_session');
-			session_start();
 			$_SESSION['user_id'] = $email;
 			$_SESSION['username'] = $open_data_file[$email]['username'];
 			header('Location: home.php');
