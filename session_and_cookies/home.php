@@ -8,9 +8,6 @@
 		header('Location: index.php');
 	}
 
-
-
-
     ?>
 
 <!doctype html>

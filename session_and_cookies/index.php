@@ -2,6 +2,7 @@
 
 	error_reporting(E_ALL);
 	define('USER_DATA_DIR', 'users_data/');
+	// именуем сессию и стартуем ее
 	session_name('overhot_session');
 	session_start();
 
@@ -10,15 +11,20 @@
 
 	if (isset($_POST['submit'])) {
 		$email = clear_data($_POST['email']);
+		// чистим шифруем пароль
 		$password = md5(clear_data($_POST['password']));
+		// открываем массив данных пользователей из файл JSON
 		$open_data_file = json_decode(file_get_contents(USER_DATA_DIR . 'data.json'), true);
 
-		if (!empty($_POST['username']) || !empty($_POST['password'])) {
+		// если VALUE фомы EMAIL или PASSWORD не пустые, валидируем данные, иначе выводим ошибку
+		if (!empty($email) || !empty($password)) {
 			$error = auth_user($email, $password, $open_data_file);
 		} else {
 			$error = '<h3 style="color: Red;">Заполните все поля</h3>';
 		}
 
+		// валидация пользователя прошла успешно
+		// записываем в сессию EMAIL пользователя (user_id) и его Имя (username), Переадресовываемся на домашнюю страницу
 		if ($error == '') {
 			$_SESSION['user_id'] = $email;
 			$_SESSION['username'] = $open_data_file[$email]['username'];
@@ -30,17 +36,22 @@
 
 	function auth_user($email, $password, $open_data_file)
 	{
+		// если массив с данными взятым из JSON не пустой, то начинаем валидацию
 		if (!empty($open_data_file)) {
+			// если в форме введен email которого нет в массиве (т.е. не зарегистрирован другим пользаком), выходим и выводим ошибку
 			if (!array_key_exists($email, $open_data_file)) {
-				$error = '<h4 style="color: Red;">Такого пользователя нет в системе</h4>';
+				$error = '<h4 style="color: Red;">Неправильный логин или пароль</h4>';
 				return $error;
-			} elseif ($password !== $open_data_file[$email]['password']) {
-				$error = '<h3 style="color: Red;">Неправильный пароль</h3>';
+			}
+			// если введенный пароль в форме не совпадает с паролем в массиве, выходим и выводим ошибку
+			elseif ($password !== $open_data_file[$email]['password']) {
+				$error = '<h3 style="color: Red;">Неправильный логин или пароль</h3>';
 				return $error;
 			}
 		}
 	}
 
+	// чистим введенные данные от мусора
 	function clear_data($data)
 	{
 		$data = trim($data);

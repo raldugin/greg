@@ -13,6 +13,7 @@
 		$password = clear_data($_POST['password']);
 		$confirmed_password = clear_data($_POST['confirmed_password']);
 
+		// если VALUE фомы USERNAME, EMAIL, PASSWORD, CONFIRMED_PASSWORD не пустые, валидируем данные, иначе выводим ошибку
 		if (!empty($username)
 			&& !empty($email)
 			&& !empty($password)
@@ -26,50 +27,59 @@
 		if ($error == '') {
 
 			$time = date('d.m.Y H:i', time());
-			$password = md5($password);
-
+			// чистим и шифруем пароль
+			$password = md5(clear_data($password));
+			// добавляем новую запись в ассоциативный массив,
+			// где ключ массива - EMAIL => значения массива PASSWORD, USERNAME, TIME (время регистрации на сайте)
 			$userdata["$email"] = ['password' => "$password", 'username' => "$username", "time" => "$time"];
+			// если дир с файлом users_data/ создан, то конвертим массив в JSON и пишем в файл
 			if (is_dir(USER_DATA_DIR)) {
 				$open_data_file = json_decode(file_get_contents(USER_DATA_DIR . 'data.json'), true);
+				// объединяем записи массива из файла с массивом данных нового пользователя
 				$save_data_file = array_merge($open_data_file, $userdata);
+				// конвертим в JSON и записываем в файл
 				file_put_contents(USER_DATA_DIR . 'data.json', json_encode($save_data_file));
-			} else {
-				// создаем дир и пишем первую запись с данными юзера
-				mkdir(USER_DATA_DIR, 0777, true);
+			}
+			// если такого дира не существует, создаем его и пишем в файл регистрационные данные первого пользака
+			else {
+				mkdir(USER_DATA_DIR, 0755, true);
 				file_put_contents(USER_DATA_DIR . 'data.json', json_encode($userdata));
 			}
+			// переходим на страницу входа на сайт
 			header('Location: index.php');
 
 		}
 	}
 
-	/**
-	 * string $email, $email_validator, $password, $confirmed_password
-	 */
+
 	function validate_user_data($email, $email_validator, $password, $confirmed_password)
 	{
+		// открываем массив данных пользователей из файл JSON
 		$open_data_file = json_decode(file_get_contents(USER_DATA_DIR . 'data.json'), true);
 		if (!preg_match($email_validator, $email)) {
 			$error = '<h4 style="color: Red;">Введите валидный Email</h4>';
 			return $error;
 		}
-		// если файл не пустой, открываем json и в массиве проверяем совпадение email из файла и формы
-		// если такой email есть, возвращаем ошибку
+		// если массив не пустой, то в нем ищем ключ (email) с введенным в форме данными
+		// если такой ключ (email) есть, возвращаем ошибку
 		elseif (!empty($open_data_file)) {
 			if (array_key_exists($email, $open_data_file)) {
 				$error = '<h4 style="color: Red;">Такой пользователь уже есть в системе</h4>';
 				return $error;
 			}
-			unset($open_data_file);
+		// если введенный пароль меньше 6 ситмволов, то выходим и выводим ошибку
 		} elseif (strlen($password) < 6) {
 			$error = '<h4 style="color: Red;">В пароле должно быть не менее 6 символов</h4>';
 			return $error;
-		} elseif ($password !== $confirmed_password) {
+		}
+		// если введенный пароль не совпадает с повторным паролем, то выходим и выводим ошибку
+		elseif ($password !== $confirmed_password) {
 			$error = '<h4 style="color: Red;">Пароли не совпадают</h4>';
 			return $error;
 		}
 	}
 
+	// чистим введенные данные от мусора
 	function clear_data($data)
 	{
 		$data = trim($data);
