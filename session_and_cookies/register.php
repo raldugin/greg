@@ -48,14 +48,14 @@
 	 */
 	function validate_user_data($email, $email_validator, $password, $confirmed_password)
 	{
+		$open_data_file = json_decode(file_get_contents(USER_DATA_DIR . 'data.json'), true);
 		if (!preg_match($email_validator, $email)) {
 			$error = '<h4 style="color: Red;">Введите валидный Email</h4>';
 			return $error;
 		}
 		// если файл не пустой, открываем json и в массиве проверяем совпадение email из файла и формы
 		// если такой email есть, возвращаем ошибку
-		elseif (!empty(trim(file_get_contents(USER_DATA_DIR . 'data.json')))) {
-			$open_data_file = json_decode(file_get_contents(USER_DATA_DIR . 'data.json'), true);
+		elseif (!empty($open_data_file)) {
 			if (array_key_exists($email, $open_data_file)) {
 				$error = '<h4 style="color: Red;">Такой пользователь уже есть в системе</h4>';
 				return $error;

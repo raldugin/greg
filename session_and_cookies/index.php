@@ -31,8 +31,7 @@
 
 	function auth_user($email, $password, $open_data_file)
 	{
-		if (!empty(trim(file_get_contents(USER_DATA_DIR . 'data.json')))) {
-
+		if (!empty($open_data_file)) {
 			if (!array_key_exists($email, $open_data_file)) {
 				$error = '<h4 style="color: Red;">Такого пользователя нет в системе</h4>';
 				return $error;
