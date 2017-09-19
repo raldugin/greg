@@ -63,11 +63,11 @@
 </head>
 <body>
 <form method="post">
-	<h3>Please Sign in or <a href="register.php">Register</a></h3>
+	<h3>Войдите в систему или <a href="register.php">Зарегистрируйтесь</a></h3>
 	<?= $error; ?>
-	<p><label>Login</label></p>
+	<p><label>Email</label></p>
 	<input type="text" name="email" value="<?= $email ?>">
-	<p><label>Password</label></p>
+	<p><label>Пароль</label></p>
 	<input type="password" name="password">
 	<p><input type="submit" name="submit"></p>
 </form>

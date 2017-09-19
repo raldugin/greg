@@ -90,15 +90,15 @@
 </head>
 <body>
 <form method="post">
-	<h3>Please Register or <a href="index.php">Sign in</a></h3>
+	<h3>Зарегистрируйтесь <a href="index.php">или войдите в систему</a></h3>
 	<?= $error; ?>
-	<p><label>Your name</label></p>
+	<p><label>Ваше имя</label></p>
 	<input type="text" name="username" value="<?= $username ?>">
 	<p><label>Email</label></p>
 	<input type="text" name="email" value="<?= $email ?>">
-	<p><label>Password</label></p>
+	<p><label>Пароль</label></p>
 	<input type="password" name="password" value="<?= $password ?>">
-	<p><label>Confirm password</label></p>
+	<p><label>Подтвердите пароль</label></p>
 	<input type="password" name="confirmed_password">
 	<p><input type="submit" name="submit"></p>
 </form>
