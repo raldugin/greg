@@ -32,7 +32,7 @@
 			// добавляем новую запись в ассоциативный массив,
 			// где ключ массива - EMAIL => значения массива PASSWORD, USERNAME, TIME (время регистрации на сайте)
 			// $userdata["$email"] = ['password' => "$password", 'username' => "$username", "time" => "$time"];
-			$userdata["$email"] = ['username' => "$username", 'password' => "$password", 'phone' => '', 'address' => '', "time" => "$time"];
+			$userdata["$email"] = ['username' => "$username", 'password' => "$password", 'phone' => '', 'address' => '', 'time' => "$time"];
 			// если дир с файлом users_data/ создан, то конвертим массив в JSON и пишем в файл
 			if (is_dir(USER_DATA_DIR)) {
 				$open_data_file = json_decode(file_get_contents(USER_DATA_DIR . 'data.json'), true);

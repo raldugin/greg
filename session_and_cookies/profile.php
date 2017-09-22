@@ -12,7 +12,7 @@
 
 	// открываем массив данных пользователей из файл JSON
 	$open_data_file = json_decode(file_get_contents(USER_DATA_DIR . 'data.json'), true);
-	// подставляем в форму VALUE текущего Username и EMAIL
+
 	$username = $email = $phone = $address = $time = '';
 
 	$username = $_SESSION['username'];
@@ -21,9 +21,7 @@
 	$phone = $open_data_file[$email]['phone'];
 	$address = $open_data_file[$email]['address'];
 	$time = $open_data_file[$email]['time'];
-	var_dump($address);
 
-	//$open_data_file[$_SESSION['user_id']]['password']
 
 ?>
 
