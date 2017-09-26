@@ -12,13 +12,12 @@
 	if (!isset($_SESSION['user_id'])) {
 		header('Location: index.php');
 	}
-	//var_dump($_SESSION['user_id']);
 
 	// открываем массив данных пользователей из файл JSON
 	$open_data_file = json_decode(file_get_contents(USER_DATA_DIR . 'data.json'), true);
 	$user_current = $_SESSION['user_id'];
+	/*
 	$user_key_in_array = find_user_key ($user_current, $open_data_file);
-
 	function find_user_key($user_current, $open_data_file)
 	{
 		foreach ($open_data_file as $key => $value) {
@@ -27,25 +26,15 @@
 			}
 		}
 	}
-
-	//var_dump($user_key_in_array);
-
-
-
-
-
-
+	*/
 
 	// подставляем в форму VALUE текущего Username и EMAIL
-
-
-
-	$username_current 	= $open_data_file[ $user_current ][ 'username' ];
-	$email_current 		= $user_current;
-	$password_current 	= $open_data_file[ $user_current ][ 'password' ];
-	$phone_current 		= $open_data_file[ $user_current ][ 'phone' ];
-	$address_current 	= $open_data_file[ $user_current ][ 'address' ];
-	$time 				= $open_data_file[ $user_current ][ 'time' ];
+	$username_current	= $open_data_file[ $user_current ][ 'username' ];
+	$email_current		= $user_current;
+	$password_current	= $open_data_file[ $user_current ][ 'password' ];
+	$phone_current		= $open_data_file[ $user_current ][ 'phone' ];
+	$address_current	= $open_data_file[ $user_current ][ 'address' ];
+	$time				= $open_data_file[ $user_current ][ 'time' ];
 
 
 
@@ -57,20 +46,17 @@
 		$address = clear_data($_POST['address']);
 		$password = clear_data($_POST['password']);
 		// валидируем значения input в форме
-		$error = validate_user_data($username, $username_current, $user_current,
+		$error = validate_user_data(
+			$username, $username_current, $user_current,
 			$email, $email_current,
 			$phone, $phone_current,
 			$address, $address_current,
 			$email_validator,
-			$password, $open_data_file);
+			$password, $open_data_file
+		);
 
-if (empty($error)) {
-
-//			echo "<pre>";
-//			print_r($open_data_file);
-//			echo "</pre>";
-
-			$changed_user_data [$email_current] = [
+	if (empty($error)) {
+		$changed_user_data [$email_current] = [
 				'username' => "$username_current",
 				'password' => "$password_current",
 				'phone' => "$phone_current",
@@ -83,46 +69,10 @@ if (empty($error)) {
 		$save_data_file = array_merge($open_data_file, $changed_user_data);
 		file_put_contents(USER_DATA_DIR . 'data.json', json_encode($save_data_file, JSON_UNESCAPED_UNICODE));
 
-	$error = 'Изменения внесены';
+		//header('refresh:1; url=profile.php');
+		header('Location: profile.php');
 
-	header('refresh:1; url=profile.php');
-
-		}
-		/*
-				$change_info =
-
-						foreach ($open_data_file as $key => $value) {
-						echo 'работаем'.'<br>';
-						if ($key == $_SESSION['user_id']) {
-							echo '<br>Текущий email:<br>';
-							var_dump($email_current);
-							echo '<br>Имя ключа массива:<br>';
-							var_dump($key);
-							echo '<br>Имя нового ключа:<br>';
-							$key = $email_current;
-							echo '<br>Имя сесии:<br>';
-							var_dump($_SESSION['user_id']);
-							echo '<br>';
-							print_r($value);
-						}
-
-
-		*/
-
-
-//		foreach ($open_data_file as $key => $value) {
-//			echo '<br>';
-//			$key = $key.'_new';
-//			print_r($key);
-//
-//
-//
-//		}
-
-//			$arr[$newkey] = $arr[$oldkey];
-//			unset($arr[$oldkey]);
-
-		//header('refresh:2; url=profile.php');
+	}
 	}
 
 
@@ -166,6 +116,8 @@ if (empty($error)) {
 			$error = 'Введите имя';
 			return $error;
 		}
+		$username_current = $username;
+		$_SESSION['username'] = $username_current;
 		// если поле формы EMAIL пустое, или введен новый EMAIL который не прошел REGEX, выводим ошибку
 		if (empty($email) || !preg_match($email_validator, $email)) {
 			$email_current = '';

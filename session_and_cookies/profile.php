@@ -13,7 +13,6 @@
 	// открываем массив данных пользователей из файл JSON
 	$open_data_file = json_decode(file_get_contents(USER_DATA_DIR . 'data.json'), true);
 
-	$username = $email = $phone = $address = $time = '';
 
 	$username = $_SESSION['username'];
 	$email = $_SESSION['user_id'];
