@@ -53,7 +53,10 @@
 		echo $json_string."<br><br>";
 
 		// декодируем JSON из строки $json_string в ассоциативный массив (т.к. TRUE) и выводим на экран
-		print_r(json_decode($json_string, true));
+		//print_r(json_decode($json_string, true));
+		$arr_json = (json_decode($json_string, true));
+		print_r($arr_json);
+
 
 		/*
 		 -------------------------------------------------------------

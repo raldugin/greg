@@ -136,6 +136,8 @@
 //		}
 
 		// если кол-во элементов массива $error - FALSE (не найдены ошибки), то делаем редирект на новую страницу и передаем имя
+
+
 		if (!count($error)) {
 
 			if (!is_dir(USER_DATA_DIR)) {
@@ -145,7 +147,7 @@
 			// пишет данные в файл и добавляет новые записи при новом обращении ()
 			file_put_contents(USER_DATA_DIR.'user_data.txt', $name.'|'.$email.'|'.$password.'|'.$confirmed_password.PHP_EOL, FILE_APPEND);
 
-			header( 'Location: entered.php?name='.$name);
+			header( "Location: entered.php?name=$name");
 		}
 
 	} // end of if ($_POST['submit'])

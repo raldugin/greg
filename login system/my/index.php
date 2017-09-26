@@ -31,7 +31,7 @@
 </head>
 <body>
 <!-- Dropdown Structure -->
-<ul id="dropdown1" class="dropdown-content">
+<ul id="dropdown-but" class="dropdown-but dropdown-content">
 	<li><a href="#!">one</a></li>
 	<li><a href="#!">two</a></li>
 	<li class="divider"></li>
@@ -265,11 +265,11 @@
 
 </body>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript" src="js/materialize.js"></script>
 <script>
     $(document).ready(function () {
         $('select').material_select();
-        //$(".dropdown-button").dropdown();
+        $("#dropdown-but").dropdown();
     });
 </script>
 </html>
