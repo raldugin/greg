@@ -1,0 +1,8 @@
+﻿brand: 		Psycho Extreme Ghost
+heat Level: 	Fatal 10+/10
+desc:		Dr Burnorium - the purveyor of pain, melter of faces and creator of the incredible Psycho Juice Hot Sauces! 
+		He recommends a daily dose, applied with caution!  Having tried it, we understand why!
+
+Ingredients:	Naga Jolokia (Ghost Pepper), oleoresin, water, cane vinegar, mustard, garlic and salt.
+емкость бут:	5 fl oz (148ml)
+цена:		$15

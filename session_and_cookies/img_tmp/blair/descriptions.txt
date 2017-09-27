@@ -1,0 +1,11 @@
+﻿brand: 		Blair's Mega Death
+heat Level: 	Fatal 10+/10
+desc:		This product contains the hottest known ingredients on the planet Earth. 
+		Don't let the fact that it contains Molasses fool you, it's heat is unreal. 
+		Just when you thought it couldn't get hotter, it did. 
+		Be warned, this sauce contains ingredients 500 times hotter than a jalapeno chile. Use sparingly. 
+		It is not recommended for use without dilution.
+
+Ingredients:	Habanero Peppers, Cayenne Peppers, Vinegar, Salt, Natural Flavor, Molasses, Guava Puree, Ginger, Corn Starch, Garlic, Chipotle Peppers, Onion, Ascorbic Acid (Vitamin C), Spices.
+емкость бут:	5 fl oz (148ml)
+цена:		$16.8

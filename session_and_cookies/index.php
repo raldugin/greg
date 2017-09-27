@@ -69,17 +69,23 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="assets/css/materialize.css">
+	<link rel="stylesheet" href="assets/css/styles.css">
 	<title>Вход в систему</title>
 </head>
 <body>
-<form method="post">
-	<h3>Войдите в систему или <a href="register.php">Зарегистрируйтесь</a></h3>
-	<?= $error; ?>
-	<p><label>Email</label></p>
-	<input type="text" name="email" value="<?= $email ?>">
-	<p><label>Пароль</label></p>
-	<input type="password" name="password">
-	<p><input type="submit" name="submit"></p>
-</form>
+<div class="container">
+	<form method="post">
+		<h5>Войдите в систему или <a href="register.php">Зарегистрируйтесь</a></h5>
+		<?= $error; ?>
+		<p><label>Email</label></p>
+		<input type="text" name="email" value="<?= $email ?>">
+		<p><label>Пароль</label></p>
+		<input type="password" name="password">
+		<p><input type="submit" name="submit"></p>
+	</form>
+</div>
 </body>
+<script src="//code.jquery.com/jquery-latest.js"></script>
+<script src="assets/js/materialize.js"></script>
 </html>

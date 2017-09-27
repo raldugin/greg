@@ -143,16 +143,6 @@
 			return $error;
 		}
 
-//		echo '<br>';
-//		echo '$email_current';
-//		echo '<br>';
-//		var_dump($email_current);
-//		echo '<br>';
-//		echo '$user_current';
-//		echo '<br>';
-//		var_dump($user_current);
-
-
 		if (md5($password) !== $open_data_file[$_SESSION['user_id']]['password']) {
 			//$email_current = $email;
 //			var_dump($email);
@@ -161,12 +151,6 @@
 			$error = 'Введите пароль для изменений';
 			return $error;
 		}
-		// если валидация EMAIL и PASSWORD успешна, то меняем значение текущего Email на введенный
-		//меняем в сесиии
-
-		// меняем в массиве и пишем
-
-
 		//$error = 'Успешно внесены изменения';
 		//return $error;
 	}
@@ -180,12 +164,6 @@
 		return $data;
 	}
 
-	//	var_dump($_SESSION['user_id']);
-	//	echo '<br>';
-	//	var_dump(md5($password));
-	//	echo '<br>';
-	//	var_dump($open_data_file[$_SESSION['user_id']]['password']);
-
 ?>
 
 <!doctype html>
@@ -194,31 +172,41 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="assets/css/materialize.css">
+	<link rel="stylesheet" href="assets/css/styles.css">
 	<title>Личный кабинет</title>
 </head>
 <body>
-<h2>Личный кабинет</h2>
-<br>
-<h3>Изменить личные данные:</h3>
-<h4 style="color: Red;"><?= $error; ?></h4>
-<form method="post">
-	<p><label>Ваше имя</label></p>
-	<input type="text" name="username" value="<?= $username_current ?>">
-	<p><label>Email</label></p>
-	<input type="text" name="email" value="<?= $email_current ?>">
-	<p><label>Телефон</label></p>
-	<input type="text" name="phone" value="<?= $phone_current ?>">
-	<p><label>Адрес</label></p>
-	<input type="text" name="address" value="<?= $address_current ?>">
-	<p><label>Текущий пароль</label></p>
-	<input type="password" name="password">
-	<p><input type="submit" value="потвердить изменения" name="submit"></p>
-</form>
-<br>
-<a href="profile.php">Перейти в личный кабинет</a>
-<br>
-<a href="home.php">Перейти на главную страницу</a>
-<br>
-<a href="logout.php">Покинуть сайт</a>
+<div class="container">
+	<div class="shopping_cart">
+		<a href="">КОРЗИНА</a>
+	</div>
+
+	<h5>Личный кабинет</h5>
+	<br>
+	<h6>Изменить личные данные:</h6>
+	<h6 style="color: Red;"><?= $error; ?> </h6>
+	<form method="post">
+		<p><label>Ваше имя</label></p>
+		<input type="text" name="username" value="<?= $username_current ?>">
+		<p><label>Email</label></p>
+		<input type="text" name="email" value="<?= $email_current ?>">
+		<p><label>Телефон</label></p>
+		<input type="text" name="phone" value="<?= $phone_current ?>">
+		<p><label>Адрес</label></p>
+		<input type="text" name="address" value="<?= $address_current ?>">
+		<p><label>Текущий пароль</label></p>
+		<input type="password" name="password">
+		<p><input type="submit" name="submit" value="ok" ></p>
+	</form>
+	<br>
+	<a href="profile.php">Перейти в личный кабинет</a>
+	<br>
+	<a href="home.php">Перейти на главную страницу</a>
+	<br>
+	<a href="logout.php">Покинуть сайт</a>
+</div>
 </body>
+<script src="//code.jquery.com/jquery-latest.js"></script>
+<script src="assets/js/materialize.js"></script>
 </html>

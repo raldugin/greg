@@ -1,0 +1,8 @@
+﻿brand: 		Pain 100%
+heat Level: 	Blistering 9/10
+desc:		A seriously hot sauce made with explosive Habanero peppers. 
+		Absolutely packed full of heat and flavour. Awesome flavour for a sauce this hot.
+
+Ingredients:	Habañero peppers, tomato paste, natural pepper flavoring, salt, spices
+емкость бут:	7.5 fl oz (210ml)
+цена:		$7

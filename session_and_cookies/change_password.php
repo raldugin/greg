@@ -40,6 +40,10 @@
 
 	function validate_user_passwords($password, $new_password, $confirmed_new_password, $user_current, $open_data_file)
 	{
+		if (empty($new_password) && empty($confirmed_new_password)) {
+			$error = '';
+			return $error;
+		}
 		if ( $password !== $open_data_file[$user_current]['password']) {
 			$error = 'Неправильный текущий пароль';
 			return $error;
@@ -72,25 +76,52 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="assets/css/materialize.css">
+	<link rel="stylesheet" href="assets/css/styles.css">
 	<title>Личный кабинет</title>
 </head>
 <body>
-	<h2>Личный кабинет</h2>
+<div class="container">
+	<div class="shopping_cart">
+		<a href="">КОРЗИНА</a>
+	</div>
+	<h5>Личный кабинет</h5>
 	<br>
-	<h3>Изменить пароль:</h3>
-	<h4 style="color: Red;"><?= $error; ?></h4>
-	<form action="" method="post">
-		<p><label>Текущий пароль:</label></p>
-		<input type="password" name="password">
-		<p><label>Новый пароль:</label></p>
-		<input type="password" name="new_password">
-		<p><label>Подтвердите новый пароль:</label></p>
-		<input type="password" name="confirmed_new_password">
-		<p><input type="submit" name="submit" value="Поменять пароль"></p>
-	</form>
-	<?= $error; ?>
-	<a href="home.php">Перейти на главную страницу</a>
-	<br>
-	<a href="logout.php">Покинуть сайт</a>
+	<h6>Изменить пароль:</h6>
+	<h6 style="color: Red;"><?= $error; ?> </h6>
+	<div class="row">
+		<div class="col s6" style="padding: 0">
+				<form class="col s12" action="" method="post">
+					<div class="input-field">
+						<input type="password" id="password" name="password">
+						<label for="password">Текущий пароль:</label>
+					</div>
+					<div class="input-field input-field-no-top-margin">
+						<input type="password" id="new_password" name="new_password">
+						<label for="new_password">Новый пароль:</label>
+					</div>
+					<div class="input-field input-field-no-top-margin">
+						<input type="password" id="confirmed_new_password" name="confirmed_new_password">
+						<label for="confirmed_new_password">Подтвердите новый пароль:</label>
+						<input type="submit" name="submit" value="ok">
+					</div>
+				</form>
+		</div>
+		<div class="col s6" style="padding: 0">
+			Текст описания
+		</div>
+	</div>
+	<p><a href="home.php">Перейти на главную страницу</a></p>
+	<p><a href="logout.php">Покинуть сайт</a></p>
+</div>
+
+
 </body>
+<script src="//code.jquery.com/jquery-latest.js"></script>
+<script src="assets/js/materialize.js"></script>
+<script>
+    $(document).ready(function() {
+        Materialize.updateTextFields();
+    })
+</script>
 </html>

@@ -1,0 +1,8 @@
+﻿brand: 		Mad Dog Trinidad Scrorpion
+heat Level: 	Nuclear 10/10
+desc:		The latest creation from David Ashley at Ashley Foods.  
+		Famous for delivering sauces that perfectly balance heat and flavour, this sauce is no exception.
+
+Ingredients:	Evaporated cane juice, Trinidad Scorpion peppers, Ghost peppers, garlic, onion, Peri Peri peppers, spices and xanthan gum.
+емкость бут:	5 fl oz (148ml)
+цена:		$12

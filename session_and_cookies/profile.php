@@ -30,22 +30,18 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="assets/css/materialize.css">
+	<link rel="stylesheet" href="assets/css/styles.css">
 	<title>Личный кабинет</title>
-	<style>
-		table, th, td {
-			border-collapse: collapse;
-			border: 1px solid Black;
-			padding: 5px;
-		}
-		table {
-			margin: 20px 0;
-		}
-	</style>
 </head>
 <body>
-	<h2>Личный кабинет</h2>
+<div class="container">
+	<div class="shopping_cart">
+		<a href="">КОРЗИНА</a>
+	</div>
 
-	<table width="400">
+	<h5>Личный кабинет</h5>
+	<table class="striped">
 		<tr>
 			<td>Имя:</td>
 			<td><?= $username ?></td>
@@ -67,15 +63,16 @@
 			<td><?= $time ?></td>
 		</tr>
 	</table>
-
-
 	<a href="change_personal_info.php">Изменить или добавить личные данные</a>
 	<br>
-	<a href="chage_password.php">Изменить пароль</a>
+	<a href="change_password.php">Изменить пароль</a>
 	<br>
 	<br>
 	<a href="home.php">Перейти на главную страницу</a>
 	<br>
 	<a href="logout.php">Покинуть сайт</a>
+</div>
 </body>
+<script src="//code.jquery.com/jquery-latest.js"></script>
+<script src="assets/js/materialize.js"></script>
 </html>
