@@ -28,4 +28,34 @@ table {
 	margin-top: 0;
 }
 
+nav {
+	background-color: #000;
+	height: 60px;
+	line-height: 60px;
+}
+nav a {
+
+}
+nav i,
+nav [class^="mdi-"], nav [class*="mdi-"],
+nav i.material-icons {
+	display: block;
+	font-size: 28px;
+	height: 60px;
+	line-height: 60px;
+}
+
+nav .brand-logo img {
+	display: table-cell;
+	width: 180px;
+	height: 60px;
+}
+nav ul a {
+	padding: 0;
+}
+nav ul li {
+	padding: 0 10px;
+}
+
+
 

@@ -69,11 +69,27 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="assets/css/materialize.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="assets/css/materialize.css" media="screen,projection">
 	<link rel="stylesheet" href="assets/css/styles.css">
 	<title>Вход в систему</title>
 </head>
 <body>
+<div class="navbar-fixed">
+	<nav>
+		<div class="nav-wrapper">
+			<div class="container">
+				<a href="#" class="brand-logo"><img type="image/svg+xml" src="assets/img/logo_white.svg"></a>
+				<ul class="right hide-on-med-and-down">
+					<li style="font-size: 14px;">Здравствуйте, Alex</li>
+					<li><a href="#"><i class="material-icons">person</i></a></li>
+					<li><a href="#"><i class="material-icons">local_grocery_store</i></a></li>
+					<li><a href="#"><i class="material-icons">power_settings_new</i></a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</div>
 <div class="container">
 	<form method="post">
 		<h5>Войдите в систему или <a href="register.php">Зарегистрируйтесь</a></h5>
